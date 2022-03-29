@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.PointLight?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="379.0" prefWidth="666.0" style="-fx-background-color: #ffffff; -fx-border-width: 2; -fx-border-color: #000000;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.azs.azsproj.vinOnController">
+   <children>
+      <Pane layoutX="-1.0" prefHeight="71.0" prefWidth="666.0" style="-fx-background-color: #1a193e;">
+         <children>
+            <Label alignment="CENTER" layoutY="2.0" prefHeight="61.0" prefWidth="666.0" text="Field to Reserv" textAlignment="CENTER">
+               <font>
+                  <Font name="Niagara Solid" size="56.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0" startY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.017543859779834747" green="0.04853801056742668" blue="0.9473684430122375" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.007662835249042145">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.5034561756922218">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+               <effect>
+                  <Bloom />
+               </effect>
+            </Label>
+            <PointLight color="CHARTREUSE" lightOn="true" />
+         </children>
+      </Pane>
+      <TextField fx:id="Field_Liters" alignment="CENTER" layoutX="446.0" layoutY="172.0" prefHeight="40.0" prefWidth="206.0" promptText="Liters" style="-fx-border-color: #000424; -fx-border-radius: 5; -fx-background-color: #ffffff;">
+         <effect>
+            <DropShadow />
+         </effect></TextField>
+      <TextField fx:id="Field_Mass" alignment="CENTER" layoutX="446.0" layoutY="218.0" prefHeight="40.0" prefWidth="206.0" promptText="Mass" style="-fx-border-color: #000424; -fx-border-radius: 5; -fx-background-color: #ffffff;">
+         <effect>
+            <DropShadow />
+         </effect></TextField>
+      <Button fx:id="AddReservs" graphicTextGap="5.0" layoutX="14.0" layoutY="311.0" mnemonicParsing="false" onAction="#AddReservs" prefHeight="59.0" prefWidth="167.0" style="-fx-background-color: #000424;" text="ADD" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP">
+         <font>
+            <Font name="Niagara Solid" size="33.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Button>
+      <TableView fx:id="bd_reserv" editable="true" layoutX="14.0" layoutY="76.0" onMouseClicked="#getSelected" prefHeight="219.0" prefWidth="417.0" tableMenuButtonVisible="true">
+        <columns>
+            <TableColumn fx:id="col_ID" prefWidth="56.0" sortType="DESCENDING" text="ID" visible="false" />
+            <TableColumn fx:id="col_Code" prefWidth="53.0" text="Code" />
+          <TableColumn fx:id="col_Oil" minWidth="7.0" prefWidth="61.0" text="Oil" />
+          <TableColumn fx:id="col_Liters" prefWidth="79.0" text="Liters" />
+            <TableColumn fx:id="col_Temp" prefWidth="71.0" text="Temp" />
+            <TableColumn fx:id="col_Mass" prefWidth="73.0" text="Mass" />
+            <TableColumn fx:id="col_Price" prefWidth="79.0" text="Price" />
+        </columns>
+         <effect>
+            <Blend />
+         </effect>
+      </TableView>
+      <Button fx:id="EDIT_reserv" graphicTextGap="5.0" layoutX="214.0" layoutY="311.0" mnemonicParsing="false" onAction="#EDIT_reserve" prefHeight="59.0" prefWidth="167.0" style="-fx-background-color: #000424;" text="EDIT" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP">
+         <font>
+            <Font name="Niagara Solid" size="33.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Button>
+      <Button fx:id="DEL_reserv" graphicTextGap="5.0" layoutX="413.0" layoutY="311.0" mnemonicParsing="false" onAction="#AddReservs" prefHeight="59.0" prefWidth="167.0" style="-fx-background-color: #000424;" text="DEL" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP">
+         <font>
+            <Font name="Niagara Solid" size="33.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Button>
+      <TextField fx:id="Field_ID" alignment="CENTER" layoutX="446.0" layoutY="77.0" prefHeight="40.0" prefWidth="206.0" promptText="Code" style="-fx-border-color: #000424; -fx-border-radius: 5; -fx-background-color: #ffffff;">
+         <effect>
+            <DropShadow />
+         </effect>
+      </TextField>
+      <TextField fx:id="Field_Oil" alignment="CENTER" layoutX="446.0" layoutY="124.0" prefHeight="40.0" prefWidth="206.0" promptText="Oil" style="-fx-border-color: #000424; -fx-border-radius: 5; -fx-background-color: #ffffff;">
+         <effect>
+            <DropShadow />
+         </effect>
+      </TextField>
+      <TextField fx:id="Field_Temp" alignment="CENTER" layoutX="446.0" layoutY="264.0" prefHeight="40.0" prefWidth="206.0" promptText="Temp" style="-fx-border-color: #000424; -fx-border-radius: 5; -fx-background-color: #ffffff;">
+         <effect>
+            <DropShadow />
+         </effect>
+      </TextField>
+   </children>
+   <effect>
+      <InnerShadow />
+   </effect>
+</AnchorPane>
