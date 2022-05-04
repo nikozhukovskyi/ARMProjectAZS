@@ -1,4 +1,4 @@
-package com.azs.azsproj;
+package com.azs.azsproj.DBStructure;
 
 public class ReservAZS {
 

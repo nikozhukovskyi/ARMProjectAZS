@@ -1,4 +1,4 @@
-package DBa;
+package com.azs.azsproj.DBa;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

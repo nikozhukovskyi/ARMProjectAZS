@@ -1,6 +1,7 @@
 package com.azs.azsproj;
 
-import DBa.DBconecction;
+import com.azs.azsproj.DBa.DBconecction;
+import com.azs.azsproj.DBStructure.ReservAZS;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -70,7 +71,6 @@ public class vinOnController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
        con = DBconecction.DBaConecction();
-       // dataAZS = FXCollections.observableArrayList();
         UpdateTable();
     }
 

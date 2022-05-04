@@ -6,4 +6,6 @@ module com.azs.azsproj {
 
     opens com.azs.azsproj to javafx.fxml;
     exports com.azs.azsproj;
+    exports com.azs.azsproj.DBStructure;
+    opens com.azs.azsproj.DBStructure to javafx.fxml;
 }

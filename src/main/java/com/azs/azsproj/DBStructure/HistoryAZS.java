@@ -1,4 +1,4 @@
-package com.azs.azsproj;
+package com.azs.azsproj.DBStructure;
 
 public class HistoryAZS {
     public String getOil() {
@@ -57,7 +57,15 @@ public class HistoryAZS {
         this.idCo = idCo;
     }
 
-    public HistoryAZS(int ID, String oil, double liters, Double price, Double summ, String status, String idCo ) {
+    public String getPosCod() {
+        return PosCod;
+    }
+
+    public void setPosCod(String posCod) {
+        PosCod = posCod;
+    }
+
+    public HistoryAZS(int ID, String oil, double liters, Double price, Double summ, String status, String idCo, String PosCod) {
         this.Oil = oil;
         this.Status = status;
         this.Liters = liters;
@@ -65,9 +73,10 @@ public class HistoryAZS {
         this.Summ = summ;
         this.ID = ID;
         this.idCo = idCo;
+        this.PosCod = PosCod;
     }
 
-    String Oil, Status, idCo;
+    String Oil, Status, idCo, PosCod;
     double Liters;
     Double Price;
     Double Summ;
