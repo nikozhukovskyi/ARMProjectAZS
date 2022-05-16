@@ -1,18 +1,16 @@
 package com.azs.azsproj;
 
-import com.azs.azsproj.DBa.DBconecction;
 import com.azs.azsproj.DBStructure.ReservAZS;
+import com.azs.azsproj.DBa.DBconecction;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -22,17 +20,6 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class vinOnController implements Initializable {
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
-
-    @FXML
-    private Button AddReserv;
-
-
     @FXML
     private TableView<ReservAZS> bd_reserv;
     @FXML
@@ -47,8 +34,6 @@ public class vinOnController implements Initializable {
     private TableColumn<?, ?> col_Temp;
     @FXML
     private TableColumn<?,?> col_Mass;
-    @FXML
-    private TableColumn<?,?> col_Price;
 
     @FXML
     private TextField Field_Liters;
@@ -60,11 +45,12 @@ public class vinOnController implements Initializable {
     private TextField Field_Oil;
     @FXML
     private TextField Field_Temp;
+    @FXML
+    private Label ColLabelID;
 
 
     private Connection con = null;
     private PreparedStatement pst = null;
-    private ResultSet rs = null;
     private ObservableList<ReservAZS> dataAZS;
     int index = -1;
 
@@ -75,9 +61,10 @@ public class vinOnController implements Initializable {
     }
 
     @FXML
-    void getSelected(MouseEvent event) {
+    void getSelected() {
         index = bd_reserv.getSelectionModel().getFocusedIndex();
         if(index <= -1)return;
+        ColLabelID.setText(col_ID.getCellData(index).toString());
         Field_ID.setText(col_Code.getCellData(index).toString());
         Field_Oil.setText(col_Oil.getCellData(index).toString());
         Field_Liters.setText(col_Liters.getCellData(index).toString());
@@ -88,29 +75,30 @@ public class vinOnController implements Initializable {
     public void EDIT_reserve(){
         try{
             con = DBconecction.DBaConecction();
+            String value0 = ColLabelID.getText();
             String value1 = Field_ID.getText();
             String value2 = Field_Oil.getText();
             String value3 = Field_Liters.getText();
             String value4 = Field_Temp.getText();
             String value5 = Field_Mass.getText();
 
-            String sql = "UPDATE reserv SET Code ='"+value1+"', Oil='"+value2+"',Liters='"+value3+"',Temp='"+value4+"', Mass='"+value5+"' where Code='"+value1+"'";
+            String sql = "UPDATE reserv SET id ='"+value0+"',Code ='"+value1+"', Oil='"+value2+"',Liters='"+value3+"',Temp='"+value4+"', Mass='"+value5+"' where id='"+value0+"'";
             pst = con.prepareStatement(sql);
             pst.execute();
             UpdateTable();
             System.out.println("Update");
-        } catch (Exception e){
-
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    public void AddReservs(ActionEvent event) throws SQLException {
+    public void AddReservs() throws SQLException {
         String sql = "INSERT INTO reserv(Code, Oil, Liters, Temp, Mass) Values(?,?,?,?,?)";
-        String Code = Field_ID.getText().toString();
-        String Oil = Field_Oil.getText().toString();
-        double Liters = Double.valueOf(Field_Liters.getText());
-        double Temp = Double.valueOf(Field_Temp.getText());
-        double Mass = Double.valueOf(Field_Mass.getText());
+        String Code = Field_ID.getText();
+        String Oil = Field_Oil.getText();
+        double Liters = Double.parseDouble(Field_Liters.getText());
+        double Temp = Double.parseDouble(Field_Temp.getText());
+        double Mass = Double.parseDouble(Field_Mass.getText());
 
         try {
             pst = con.prepareStatement(sql);
@@ -129,8 +117,22 @@ public class vinOnController implements Initializable {
         } finally {
             pst.close();
         }
-
     }
+
+    public void DEL_reserve(){
+        con = DBconecction.DBaConecction();
+        try {
+            pst = con.prepareStatement("DELETE FROM RESERV WHERE id =?");
+            pst.setString(1, ColLabelID.getText());
+            pst.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Noh");
+        }
+        UpdateTable();
+    }
+
 
     private void UpdateTable(){
         setCellTable();
@@ -138,13 +140,13 @@ public class vinOnController implements Initializable {
     }
 
     private void setCellTable(){
-       // col_ID.setCellValueFactory(new PropertyValueFactory<>("ID"));
+        col_ID.setCellValueFactory(new PropertyValueFactory<>("ID"));
         col_Code.setCellValueFactory(new PropertyValueFactory<>("Code"));
         col_Oil.setCellValueFactory(new PropertyValueFactory<>("Oil"));
         col_Liters.setCellValueFactory(new PropertyValueFactory<>("Liters"));
         col_Temp.setCellValueFactory(new PropertyValueFactory<>("Temp"));
         col_Mass.setCellValueFactory(new PropertyValueFactory<>("Mass"));
-        col_Price.setCellValueFactory(new PropertyValueFactory<>("Price"));
+
 
         dataAZS = FXCollections.observableArrayList();
         bd_reserv.setItems(dataAZS);
@@ -153,9 +155,9 @@ public class vinOnController implements Initializable {
     private void loadDataAZSFromDB(){
         try {
             pst = con.prepareStatement("SELECT * FROM reserv");
-            rs = pst.executeQuery();
+            ResultSet rs = pst.executeQuery();
             while (rs.next()){
-                dataAZS.add(new ReservAZS(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getDouble(5), rs.getDouble(6), rs.getDouble(7)));
+                dataAZS.add(new ReservAZS(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getDouble(5), rs.getDouble(6), rs.getDouble(7)));
             }
         } catch (SQLException e) {
            // e.printStackTrace();

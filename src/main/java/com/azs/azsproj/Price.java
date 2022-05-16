@@ -70,8 +70,7 @@ public class Price implements Initializable {
 
 
             int i = pst.executeUpdate();
-            if (i == 1)
-                System.out.println("Data insert Successfully");
+            if (i == 1) System.out.println("Data insert Successfully");
             UpdateTable();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -79,6 +78,7 @@ public class Price implements Initializable {
             pst.close();
         }
         //sqlUp();
+        clear();
     }
 
     public void Edit_Prices() {
@@ -98,11 +98,32 @@ public class Price implements Initializable {
         } catch (SQLException exception) {
             System.out.println("aaaaaaaaaaaaaaaa");
         }
+        clear();
     }
 
-    public void UpdateTable() {
+    public void Del_Prices() {
+        con = DBconecction.DBaConecction();
+        try {
+            pst = con.prepareStatement("DELETE FROM PRICE WHERE id =?");
+            pst.setString(1, id_fil.getText());
+            pst.execute();
+            UpdateTable();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Noh");
+        }
+        clear();
+    }
+
+    private void UpdateTable() {
         setCellTablePrice();
         loadDataPriceFromDB();
+    }
+
+    private void clear() {
+        Field_IDPrice.setText("");
+        Field_OilPrice.setText("");
+        Field_PricePrice.setText("");
     }
 
     @FXML
