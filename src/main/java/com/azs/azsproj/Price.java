@@ -88,7 +88,7 @@ public class Price implements Initializable {
         String value3 = Field_OilPrice.getText();
         double value4 = Double.parseDouble(Field_PricePrice.getText());
 
-        String sql = "UPDATE price SET id ='" + value1 + "',PosCode ='" + value2 + "', name='" + value3 + "',price_name='" + value4 + "' where id='" + value1 + "'";
+        String sql = "UPDATE PRICE SET id ='" + value1 + "',PosCode ='" + value2 + "', name='" + value3 + "',price_name='" + value4 + "' where id='" + value1 + "'";
 
         try {
             pst = con.prepareStatement(sql);
@@ -96,7 +96,7 @@ public class Price implements Initializable {
             UpdateTable();
             System.out.println("Update");
         } catch (SQLException exception) {
-            System.out.println("aaaaaaaaaaaaaaaa");
+            System.out.println("Error Update PRICE");
         }
         clear();
     }

@@ -17,8 +17,7 @@ import java.util.Optional;
 
 import static java.lang.Double.parseDouble;
 
-class Fill_cars extends Price {
-
+public class Fill_cars extends Price {
 
     @FXML
     public TableView<HistoryAZS> bd_history;
@@ -38,8 +37,6 @@ class Fill_cars extends Price {
     public TableColumn<?, ?> Summ_his;
     @FXML
     private TableColumn<?, ?> PosCod_his;
-
-
     @FXML
     public TableView<CartStruct> bd_cart;
     @FXML
@@ -54,8 +51,6 @@ class Fill_cars extends Price {
     public TableColumn<?, ?> Cart_price;
     @FXML
     public TableColumn<?, ?> Cart_summ;
-
-
     @FXML
     public Button button_A95;
     @FXML
@@ -63,16 +58,27 @@ class Fill_cars extends Price {
     @FXML
     public Button button_DP;
     @FXML
+    public Button button_EuroA92;
+    @FXML
+    public Button button_EuroA95;
+    @FXML
+    public Button button_PremiumDP;
+    @FXML
+    public Button button_PremiumA95;
+    @FXML
+    public Button button_PremiumA92;
+    @FXML
+    public Button button_A80;
+    @FXML
+    public Button button_Gas;
+    @FXML
     public Button StartFill;
-
-
     @FXML
     public Label Label_Oil;
     @FXML
     public Label fil_price;
     @FXML
     public Label label_yes_or_no;
-
     @FXML
     public TextField Field_sum;
     @FXML
@@ -89,22 +95,6 @@ class Fill_cars extends Price {
     public ResultSet rs = null;
     public ObservableList<HistoryAZS> historyAZS;
     private ObservableList<CartStruct> cart;
-
-    public void Field_sum() {
-        double price = parseDouble(fil_price.getText());
-        double liters = parseDouble(Field_sum.getText());
-        double sum = liters / price;
-        Field_Liters_oil.setText(String.format("%.3f", sum));
-        //  FieldSummToPay.setText(Field_sum.getText());
-    }
-
-    public void Field_Liters_oil() {
-        double price = parseDouble(fil_price.getText());
-        double liters = parseDouble(Field_Liters_oil.getText());
-        double sum = price * liters;
-        Field_sum.setText(String.format("%.2f", sum));
-        //FieldSummToPay.setText(Field_sum.getText());
-    }
 
     public void button_DP() throws SQLException {
         // A95
@@ -167,13 +157,164 @@ class Fill_cars extends Price {
 
     }
 
+    public void button_EuroA95() throws SQLException {
+        //92
+        button_EuroA95.setVisible(false);
+        button_EuroA92.setVisible(true);
+
+        pst = con.prepareStatement("SELECT * FROM price where name = 'EuroA92' ");
+        rs = pst.executeQuery();
+        while (rs.next()) {
+            String code = rs.getString(2);
+            String name = rs.getString(3);
+            double pri = rs.getDouble(4);
+            PosCodField.setText(code);
+            fil_price.setText(String.valueOf(pri));
+            Label_Oil.setText(name);
+            Field_sum.setText("");
+            Field_Liters_oil.setText("");
+        }
+    }
+
+    public void button_EuroA92() throws SQLException {
+        //95
+        button_EuroA95.setVisible(true);
+        button_EuroA92.setVisible(false);
+
+        pst = con.prepareStatement("SELECT * FROM price where name = 'EuroA95' ");
+        rs = pst.executeQuery();
+        while (rs.next()) {
+            String code = rs.getString(2);
+            String name = rs.getString(3);
+            double pri = rs.getDouble(4);
+            PosCodField.setText(code);
+            fil_price.setText(String.valueOf(pri));
+            Label_Oil.setText(name);
+            Field_sum.setText("");
+            Field_Liters_oil.setText("");
+        }
+    }
+
+    public void button_PremiumA95() throws SQLException {
+        //Prem92
+        button_PremiumA92.setVisible(false);
+        button_PremiumA92.setVisible(true);
+
+        pst = con.prepareStatement("SELECT * FROM price where name = 'PremiumA92' ");
+        rs = pst.executeQuery();
+        while (rs.next()) {
+            String code = rs.getString(2);
+            String name = rs.getString(3);
+            double pri = rs.getDouble(4);
+            PosCodField.setText(code);
+            fil_price.setText(String.valueOf(pri));
+            Label_Oil.setText(name);
+            Field_sum.setText("");
+            Field_Liters_oil.setText("");
+        }
+    }
+
+    public void button_PremiumA92() throws SQLException {
+        //PremDP
+        button_PremiumA92.setVisible(false);
+        button_PremiumDP.setVisible(true);
+
+        pst = con.prepareStatement("SELECT * FROM price where name = 'PremiumDP' ");
+        rs = pst.executeQuery();
+        while (rs.next()) {
+            String code = rs.getString(2);
+            String name = rs.getString(3);
+            double pri = rs.getDouble(4);
+            PosCodField.setText(code);
+            fil_price.setText(String.valueOf(pri));
+            Label_Oil.setText(name);
+            Field_sum.setText("");
+            Field_Liters_oil.setText("");
+        }
+    }
+
+    public void button_PremiumDP() throws SQLException {
+        //PremA95
+        button_PremiumDP.setVisible(false);
+        button_PremiumA95.setVisible(true);
+
+        pst = con.prepareStatement("SELECT * FROM price where name = 'PremiumA95' ");
+        rs = pst.executeQuery();
+        while (rs.next()) {
+            String code = rs.getString(2);
+            String name = rs.getString(3);
+            double pri = rs.getDouble(4);
+            PosCodField.setText(code);
+            fil_price.setText(String.valueOf(pri));
+            Label_Oil.setText(name);
+            Field_sum.setText("");
+            Field_Liters_oil.setText("");
+        }
+    }
+
+    public void button_A80() throws SQLException {
+        //A80
+        button_A80.setVisible(false);
+        button_A80.setVisible(true);
+
+        pst = con.prepareStatement("SELECT * FROM price where name = 'A80' ");
+        rs = pst.executeQuery();
+        while (rs.next()) {
+            String code = rs.getString(2);
+            String name = rs.getString(3);
+            double pri = rs.getDouble(4);
+            PosCodField.setText(code);
+            fil_price.setText(String.valueOf(pri));
+            Label_Oil.setText(name);
+            Field_sum.setText("");
+            Field_Liters_oil.setText("");
+        }
+    }
+
+    public void button_Gas() throws SQLException {
+        //GAS
+        button_Gas.setVisible(false);
+        button_Gas.setVisible(true);
+
+        pst = con.prepareStatement("SELECT * FROM price where name = 'Gas' ");
+        rs = pst.executeQuery();
+        while (rs.next()) {
+            String code = rs.getString(2);
+            String name = rs.getString(3);
+            double pri = rs.getDouble(4);
+            PosCodField.setText(code);
+            fil_price.setText(String.valueOf(pri));
+            Label_Oil.setText(name);
+            Field_sum.setText("");
+            Field_Liters_oil.setText("");
+        }
+    }
+
+
+    public void Field_sum() {
+        double price = parseDouble(fil_price.getText());
+        double liters = parseDouble(Field_sum.getText());
+        double sum = liters / price;
+        Field_Liters_oil.setText(String.format("%.3f", sum));
+        //  FieldSummToPay.setText(Field_sum.getText());
+    }
+
+    public void Field_Liters_oil() {
+        double price = parseDouble(fil_price.getText());
+        double liters = parseDouble(Field_Liters_oil.getText());
+        double sum = price * liters;
+        Field_sum.setText(String.format("%.2f", sum));
+        //FieldSummToPay.setText(Field_sum.getText());
+    }
+
     public void StartFill() throws SQLException {
-        Alert al = new Alert(Alert.AlertType.CONFIRMATION);
-        al.setTitle("Підтвердження замовлення");
-        al.setContentText("Ви хочите продовжити процес замовлення?");
-        Optional<ButtonType> result = al.showAndWait();
+        javafx.scene.control.Alert ale = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.CONFIRMATION);
+        ale.setTitle("Підтвердження замовлення");
+        ale.setContentText("Ви хочите продовжити процес замовлення?");
+        Optional<ButtonType> result = ale.showAndWait();
+
         if (result.get() == ButtonType.OK) {
-            Progresstr();
+            Progress();
             try {
                 String sql = "INSERT INTO history(Oil, Liters, Price, Summ, Status, PosCode) Values(?,?,?,?,?,?)";
                 String Oil = Label_Oil.getText();
@@ -196,26 +337,25 @@ class Fill_cars extends Price {
                 setCellTable_his();
                 loadDataAZSFromDB_His();
             } catch (SQLException e) {
-                e.printStackTrace();
-            } finally {
-                pst.close();
+                //e.printStackTrace();
+                System.out.println("Error FillCars Insert History");
             }
             sqlUp();
-            deletecartRecord();
+            DeleteCARTRecord();
         } else if (result.get() == ButtonType.CANCEL) {
-            System.out.println("noo");
+            System.out.println("CANCEL Start");
         }
     }
     //start fill Write to DB History
 
-    public void Progresstr() {
+    public void Progress() {
         double Liter = parseDouble(Field_Liters_oil.getText());
         ProgressBarExample pbr = new ProgressBarExample();
         pbr.initializeUI(Liter);
         ProgressBarExample.main(Liter);
     }
 
-    public void deletecartRecord() {
+    public void DeleteCARTRecord() {
 
         con = DBconecction.DBaConecction();
         try {
@@ -224,7 +364,7 @@ class Fill_cars extends Price {
             UpdateCart();
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("fuuck");
+            System.out.println("Error delete CART records");
         }
         clear();
     }
@@ -237,7 +377,7 @@ class Fill_cars extends Price {
                 historyAZS.add(new HistoryAZS(rs.getInt(1), rs.getString(2), rs.getDouble(3), rs.getDouble(4), rs.getDouble(5), rs.getString(6), rs.getString(7), rs.getString(8)));
             }
         } catch (SQLException e) {
-            // e.printStackTrace();
+            System.out.println("Error load data DB His");
         }
     }
 
@@ -262,14 +402,13 @@ class Fill_cars extends Price {
             setCellTable_his();
             loadDataAZSFromDB_His();
         } catch (Exception e) {
-            System.out.println("aas");
+            System.out.println("Error update ID in History DB");
         }
     }
 
     public void alertError() {
         Alert wro = new Alert(Alert.AlertType.ERROR, "Перевірте правельність вводу");
         wro.showAndWait();
-
     }
 
     public void preview() throws SQLException {
@@ -280,12 +419,11 @@ class Fill_cars extends Price {
             String nameOil = rs.getString(2);
             PosCodField.setText(nameOil);
         }
-        pst = con.prepareStatement("select exists(select CartOil from cart where CartOil='A95' or CartOil='A92' or CartOil='Diesel')");
+        pst = con.prepareStatement("select exists(select CartOil from cart where CartOil='A95' or CartOil='A92' or CartOil='Diesel' or CartOil='Gas' or CartOil='PremiumA95' or CartOil='PremiumA92' or CartOil='PremiumDP' or CartOil='A80' or CartOil='EuroA95' or CartOil='EuroA92')");
         rs = pst.executeQuery();
         while (rs.next()) {
             String yes_or_no = rs.getString(1);
             label_yes_or_no.setText(yes_or_no);
-
         }
         if (label_yes_or_no.getText().equals("1")) {
             System.out.println("yeee");
@@ -299,7 +437,6 @@ class Fill_cars extends Price {
             double cartPrice = parseDouble(fil_price.getText());
             double cartSumm = parseDouble(Field_sum.getText());
 
-
             try {
                 pst = con.prepareStatement(sql);
                 pst.setString(1, cartPos);
@@ -308,26 +445,21 @@ class Fill_cars extends Price {
                 pst.setDouble(4, cartPrice);
                 pst.setDouble(5, cartSumm);
 
-
                 int i = pst.executeUpdate();
                 if (i == 1) System.out.println("Data insert Successfully");
                 setCellTable_Cart();
                 loadDataAZSFromDB_Cart();
 
             } catch (SQLException e) {
-                e.printStackTrace();
-            } //finally {
-            //pst.close();
-            // }
+                System.out.println("Error Insert into CART");
+            }
 
             pst = con.prepareStatement("SELECT SUM(CartSumm) FROM cart");
             rs = pst.executeQuery();
             while (rs.next()) {
                 double pri = rs.getDouble(1);
-
                 FieldSummToPay.setText(String.valueOf(pri));
             }
-
         }
     }
 
@@ -337,11 +469,13 @@ class Fill_cars extends Price {
         index = bd_cart.getSelectionModel().getFocusedIndex();
         if (index <= -1) return;
         Field_RegCartID.setText(Cartid.getCellData(index).toString());
-        //Field_reg_Liters_cart.setText(Cart_liters.getCellData(index).toString());
+
     }
 
     public void Delete() {
+
         con = DBconecction.DBaConecction();
+
         try {
             pst = con.prepareStatement("DELETE FROM CART WHERE id =?");
             pst.setString(1, Field_RegCartID.getText());
@@ -360,6 +494,7 @@ class Fill_cars extends Price {
     }
 
     public void loadDataAZSFromDB_Cart() {
+
         try {
             pst = con.prepareStatement("SELECT * FROM asz.cart");
             rs = pst.executeQuery();
@@ -367,7 +502,7 @@ class Fill_cars extends Price {
                 cart.add(new CartStruct(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getDouble(5), rs.getDouble(6)));
             }
         } catch (SQLException e) {
-            // e.printStackTrace();
+            System.out.println("Error load data from CART");
         }
     }
 
@@ -398,7 +533,7 @@ class Fill_cars extends Price {
             Label_Oil.setText(rs.getString("name"));
             fil_price.setText(rs.getString("price_name"));
         }
-    }     // test PosCode
+    }
 
     public void clear() {
         fil_price.setText("");
